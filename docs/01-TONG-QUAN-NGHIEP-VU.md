@@ -14,7 +14,7 @@
 | Loại sản phẩm | Web quản lý + tablet cho phục vụ + màn hình bếp |
 | Ý tưởng gốc | 1.2 · Quản lý nhà hàng (`ZDOCS/02-KE-HOACH/DANH-SACH-Y-TUONG.md`) |
 | Người phụ trách | |
-| Trạng thái | Mới tạo từ khuôn mẫu |
+| Trạng thái | Có tài liệu nghiệp vụ (SRS, use case, kịch bản demo, kịch bản kiểm thử), chưa code |
 
 ## 2. Vấn đề của khách hàng
 
@@ -46,12 +46,15 @@
 | Area | Chức năng | Màn hình (route FE dự kiến) | Ưu tiên |
 | :--- | :--- | :--- | :---: |
 | `System` | Đăng nhập, tài khoản, vai trò, cài đặt | Có sẵn | — |
+| `Pos` | Tổng quan trong ngày | `/dashboard` | P2 |
 | `Pos` | Khu vực, sơ đồ bàn | `/tables` | P1 |
 | `Pos` | Thực đơn | `/menu-items` | P1 |
 | `Pos` | Gọi món theo bàn | `/tables/[id]` | P1 |
 | `Pos` | Màn hình bếp | `/kitchen` | P1 |
 | `Pos` | Chuyển bàn, gộp bàn, tách hóa đơn | `/tables/[id]` | P1 |
 | `Pos` | Thanh toán | `/tables/[id]/checkout` | P1 |
+| `Pos` | In phiếu tạm tính, hóa đơn | `/orders/[id]/print` | P1 |
+| `Pos` | Tra cứu, in lại, hủy hóa đơn | `/orders` | P2 |
 | `Pos` | Đặt bàn trước | `/reservations` | P2 |
 | `Pos` | Báo cáo doanh thu, món | `/reports` | P2 |
 
