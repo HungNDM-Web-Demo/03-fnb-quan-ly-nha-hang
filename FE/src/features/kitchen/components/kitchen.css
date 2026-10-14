@@ -1,0 +1,13 @@
+/* Viền nhấp nháy 5 giây khi có phiếu mới (FR-15, UC-06 bước 3) */
+@keyframes kds-flash {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--cta);
+  }
+  50% {
+    box-shadow: 0 0 0 6px var(--cta);
+  }
+}
+.kds-flash {
+  animation: kds-flash 1s ease-in-out 5;
+}

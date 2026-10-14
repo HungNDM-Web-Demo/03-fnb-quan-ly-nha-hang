@@ -6,6 +6,15 @@ export const routePath = {
   profile: '/profile',
 
   dashboard: '/dashboard',
+  tables: '/tables',
+  tableService: (id: string) => `/tables/${id}`,
+  tableCheckout: (id: string) => `/tables/${id}/checkout`,
+  kitchen: '/kitchen',
+  orders: '/orders',
+  orderPrint: (id: string) => `/orders/${id}/print`,
+  reservations: '/reservations',
+  menuItems: '/menu-items',
+  reports: '/reports',
 
   settingsUsers: '/settings/users',
   settingsRoles: '/settings/roles',
@@ -13,4 +22,4 @@ export const routePath = {
   settingsAuditLogs: '/settings/audit-logs',
 } as const
 
-export type RoutePath = (typeof routePath)[keyof typeof routePath]
+export type RoutePath = Extract<(typeof routePath)[keyof typeof routePath], string>

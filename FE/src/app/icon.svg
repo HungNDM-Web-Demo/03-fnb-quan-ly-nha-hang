@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sen Quê">
+  <rect width="64" height="64" rx="14" fill="#9F1239"/>
+  <path d="M32 41C22 42.5 12.5 37.5 9.5 28.5C18.5 27.5 27.5 32.5 32 41Z" fill="#FDA4AF"/>
+  <path d="M32 41C42 42.5 51.5 37.5 54.5 28.5C45.5 27.5 36.5 32.5 32 41Z" fill="#FDA4AF"/>
+  <path d="M32 41C23.5 39 17.5 30.5 18.5 19.5C26 22.5 31 30 32 41Z" fill="#FECDD3"/>
+  <path d="M32 41C40.5 39 46.5 30.5 45.5 19.5C38 22.5 33 30 32 41Z" fill="#FECDD3"/>
+  <path d="M32 10.5C38.5 18 40 29.5 32 41C24 29.5 25.5 18 32 10.5Z" fill="#FFF1F2"/>
+  <path d="M32 17v19" stroke="#FECDD3" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M13 47.5Q32 55 51 47.5" fill="none" stroke="#FFF1F2" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M21 53.5h22" stroke="#FFF1F2" stroke-width="2.6" stroke-linecap="round" opacity=".7"/>
+</svg>

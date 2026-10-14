@@ -13,8 +13,8 @@
 | Ngành / loại khách hàng | Nhà hàng, quán ăn có phục vụ tại bàn |
 | Loại sản phẩm | Web quản lý + tablet cho phục vụ + màn hình bếp |
 | Ý tưởng gốc | 1.2 · Quản lý nhà hàng (`ZDOCS/02-KE-HOACH/DANH-SACH-Y-TUONG.md`) |
-| Người phụ trách | |
-| Trạng thái | Có tài liệu nghiệp vụ (SRS, use case, kịch bản demo, kịch bản kiểm thử), chưa code |
+| Người phụ trách | Mạnh Hùng (Pum) |
+| Trạng thái | Đã code BE + FE, chạy được cả hai chế độ (dữ liệu mẫu và BE thật trên Postgres, cập nhật thời gian thực qua SignalR) |
 
 ## 2. Vấn đề của khách hàng
 

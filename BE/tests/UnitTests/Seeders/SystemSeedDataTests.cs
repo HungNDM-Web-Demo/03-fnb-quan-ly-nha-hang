@@ -165,7 +165,10 @@ public class SystemSeedDataTests
         var admin = data.Roles.Single(r => r.Code == RoleCodes.Admin);
         Assert.Equal(data.Permissions.Select(p => p.Code), admin.Permissions);
         Assert.All(data.Roles.Where(r => r.Code is RoleCodes.Admin or RoleCodes.Manager or RoleCodes.Staff), r => Assert.True(r.IsSystem));
-        Assert.Equal(["admin", "quanly", "nhanvien"], data.QuickLoginUsers.Select(u => u.Username));
+        // Dự án này: project.json bỏ nhanvien, thêm phucvu, bep, thungan (đăng nhập nhanh) và phucvu2, phucvu3, thungan2 (không)
+        Assert.Equal(["admin", "quanly", "phucvu", "bep", "thungan"], data.QuickLoginUsers.Select(u => u.Username));
+        Assert.DoesNotContain(data.Users, u => u.Username == "nhanvien");
+        Assert.Contains(data.Users, u => u is { Username: "thungan2", QuickLogin: false });
         Assert.All(data.QuickLoginUsers, u => Assert.False(string.IsNullOrWhiteSpace(u.Description)));
     }
 

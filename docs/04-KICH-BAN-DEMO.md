@@ -38,7 +38,7 @@ Mật khẩu: giá trị `DEMO_PASSWORD` trong `.env`, hoặc bấm "Đăng nh�
 | # | Vai trò | Thao tác | Điểm cần nhấn mạnh |
 | :---: | :--- | :--- | :--- |
 | 1 | Quản lý | Đăng nhập, mở Tổng quan: 14/30 bàn đang phục vụ, khách đang ngồi, doanh thu trưa, 2 món trễ | Không cần đi một vòng nhà hàng vẫn biết bàn nào kín, bếp nào đang nghẽn |
-| 2 | Quản lý | Mở Đặt bàn, thêm đặt bàn tối nay: anh Trần Minh Quân, 19:00, 8 khách, bàn T2-01, cọc 500.000 ₫ | Không đặt trùng bàn; tới giờ bàn tự hiện "Đã đặt" trên sơ đồ, khách đến nhận bàn một chạm, cọc tự trừ khi thanh toán |
+| 2 | Quản lý | Mở Đặt bàn: tối nay đã có anh Trần Minh Quân 19:00, bàn T2-01, 8 khách, cọc 500.000 ₫. Thêm đặt bàn chị Đoàn Thị Mỹ Duyên 20:00, 4 khách, cũng bàn T2-01: hệ thống báo bàn đã giữ tới 21:00; đổi sang SV-07 thì lưu được | Không đặt trùng bàn; tới giờ bàn tự hiện "Đã đặt" trên sơ đồ, khách đến nhận bàn một chạm, cọc tự trừ khi thanh toán |
 | 3 | Phục vụ | Đổi sang Phục vụ; xem Sơ đồ bàn Tầng 1: màu trạng thái, số khách, thời gian ngồi, tạm tính; mở bàn T1-05 cho 4 khách | Phục vụ không chạy ra quầy hỏi bàn trống; nhìn thẻ bàn là biết bàn nào ngồi lâu |
 | 4 | Phục vụ | Gọi món: Gỏi ngó sen tôm thịt (Gấp, ít cay), Bò lúc lắc khoai tây, Cá chẽm hấp Hồng Kông nhập 1,2 kg, Rau muống xào tỏi, 6 Bia Tiger; bấm Gửi bếp | Món hải sản theo cân nhập số kg, giá tự tính 540.000 ₫; một lần gửi tự tách phiếu bếp nóng, bếp nguội; bia không qua bếp, mang ra ngay |
 | 5 | Bếp | Chuyển sang màn hình bếp: phiếu T1-05 vừa hiện kèm âm báo, gỏi Gấp đứng đầu; phiếu T2-03 đỏ vì Lẩu thái chờ 16 phút | Bếp không đọc giấy viết tay, không sót phiếu; món chờ lâu tự đỏ, ai nhìn cũng thấy |

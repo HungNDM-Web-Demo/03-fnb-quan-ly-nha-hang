@@ -23,6 +23,852 @@ namespace Infrastructure.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "unaccent");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Entities.Pos.Kitchen.KitchenTicket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("BatchNo")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly>("BusinessDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("OriginalTableCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Station")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TableCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<Guid>("TableId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("TicketNo")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("WaiterId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("WaiterName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("TableId");
+
+                    b.HasIndex("BusinessDate", "TicketNo")
+                        .IsUnique();
+
+                    b.HasIndex("Status", "Station", "SentAt");
+
+                    b.ToTable("Pos_KitchenTickets", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.MenuItems.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("\"IsDeleted\" = false");
+
+                    b.ToTable("Pos_Categories", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.MenuItems.MenuItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsSoldOut")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<int?>("PrepMinutes")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<int>("PricingType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Station")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("\"IsDeleted\" = false");
+
+                    b.HasIndex("CategoryId", "SortOrder");
+
+                    b.ToTable("Pos_MenuItems", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.MenuItems.QuickNote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Content")
+                        .IsUnique();
+
+                    b.ToTable("Pos_QuickNotes", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Orders.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("BatchCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CancelReason")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime?>("CancelledAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CancelledById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CancelledByUsername")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<Guid?>("CashierId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CashierName")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("ClientRequestId")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Deposit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<decimal>("DepositRefund")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<decimal>("DiscountAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<Guid?>("DiscountApprovedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("DiscountApprovedByUsername")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("DiscountReason")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int?>("DiscountType")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal?>("DiscountValue")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<int>("GuestCount")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("MergedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("MergedIntoOrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<DateTime>("OpenedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("PaidAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<DateTime?>("PaidAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("PrebillPrintedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("ReservationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Rounding")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<decimal>("ServiceCharge")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<int>("ServiceChargeRate")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("SplitCount")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid?>("SplitFromOrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Subtotal")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<Guid>("TableId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Total")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("VatAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<int>("VatRate")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("WaiterId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("WaiterName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientRequestId")
+                        .IsUnique()
+                        .HasFilter("\"ClientRequestId\" IS NOT NULL");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("MergedIntoOrderId");
+
+                    b.HasIndex("OpenedAt");
+
+                    b.HasIndex("ReservationId");
+
+                    b.HasIndex("SplitFromOrderId");
+
+                    b.HasIndex("WaiterId");
+
+                    b.HasIndex("Status", "PaidAt");
+
+                    b.HasIndex("TableId", "Status");
+
+                    b.ToTable("Pos_Orders", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Orders.OrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("BatchNo")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("CancelAcknowledgedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CancelApprovedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CancelApprovedByUsername")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("CancelNote")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int?>("CancelReason")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("CancelledAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CancelledById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CancelledByName")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("CancelledByUsername")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DoneAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsRush")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ItemCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<Guid?>("KitchenTicketId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("LineTotal")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<Guid>("MenuItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("PrepMinutes")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PricingType")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Quantity")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("numeric(18,3)");
+
+                    b.Property<string>("QuickNotes")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("SendRequestId")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<DateTime?>("SentAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("ServedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("StartedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Station")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("StatusAtCancel")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KitchenTicketId");
+
+                    b.HasIndex("MenuItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("SendRequestId");
+
+                    b.HasIndex("Status", "Station", "SentAt");
+
+                    b.ToTable("Pos_OrderItems", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Orders.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<string>("CardLast4")
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)");
+
+                    b.Property<decimal?>("CashReceived")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<Guid?>("CashierId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CashierName")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<decimal?>("ChangeAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<string>("ClientRequestId")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Method")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("PaidAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("QrContent")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<int?>("ShareNo")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientRequestId")
+                        .IsUnique()
+                        .HasFilter("\"ClientRequestId\" IS NOT NULL");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Pos_Payments", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Reservations.Reservation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("ArrivalAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CancelReason")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime?>("CancelledAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CancelledById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CancelledByName")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<DateTime?>("CheckedInAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<decimal>("Deposit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<int>("GuestCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("TableId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("Status", "ArrivalAt");
+
+                    b.HasIndex("TableId", "ArrivalAt");
+
+                    b.ToTable("Pos_Reservations", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Tables.Area", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("\"IsDeleted\" = false");
+
+                    b.ToTable("Pos_Areas", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Tables.DiningTable", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AreaId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("MergedIntoTableId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("PosX")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PosY")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Shape")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("StatusChangedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AreaId");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("\"IsDeleted\" = false");
+
+                    b.HasIndex("MergedIntoTableId");
+
+                    b.ToTable("Pos_DiningTables", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.System.AuditLogs.AuditLog", b =>
                 {
                     b.Property<Guid>("Id")
@@ -342,6 +1188,125 @@ namespace Infrastructure.Migrations
                     b.ToTable("System_UserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Pos.Kitchen.KitchenTicket", b =>
+                {
+                    b.HasOne("Domain.Entities.Pos.Orders.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Pos.Tables.DiningTable", null)
+                        .WithMany()
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.MenuItems.MenuItem", b =>
+                {
+                    b.HasOne("Domain.Entities.Pos.MenuItems.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Orders.Order", b =>
+                {
+                    b.HasOne("Domain.Entities.Pos.Orders.Order", null)
+                        .WithMany()
+                        .HasForeignKey("MergedIntoOrderId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Entities.Pos.Reservations.Reservation", null)
+                        .WithMany()
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Entities.Pos.Orders.Order", null)
+                        .WithMany()
+                        .HasForeignKey("SplitFromOrderId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Entities.Pos.Tables.DiningTable", null)
+                        .WithMany()
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.System.Users.User", null)
+                        .WithMany()
+                        .HasForeignKey("WaiterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Orders.OrderItem", b =>
+                {
+                    b.HasOne("Domain.Entities.Pos.Kitchen.KitchenTicket", "KitchenTicket")
+                        .WithMany()
+                        .HasForeignKey("KitchenTicketId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Entities.Pos.MenuItems.MenuItem", null)
+                        .WithMany()
+                        .HasForeignKey("MenuItemId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Pos.Orders.Order", "Order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KitchenTicket");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Orders.Payment", b =>
+                {
+                    b.HasOne("Domain.Entities.Pos.Orders.Order", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Reservations.Reservation", b =>
+                {
+                    b.HasOne("Domain.Entities.Pos.Orders.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Entities.Pos.Tables.DiningTable", null)
+                        .WithMany()
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Tables.DiningTable", b =>
+                {
+                    b.HasOne("Domain.Entities.Pos.Tables.Area", "Area")
+                        .WithMany()
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Pos.Tables.DiningTable", null)
+                        .WithMany()
+                        .HasForeignKey("MergedIntoTableId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Area");
+                });
+
             modelBuilder.Entity("Domain.Entities.System.Roles.RolePermission", b =>
                 {
                     b.HasOne("Domain.Entities.System.Permissions.Permission", "Permission")
@@ -389,6 +1354,13 @@ namespace Infrastructure.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pos.Orders.Order", b =>
+                {
+                    b.Navigation("Items");
+
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("Domain.Entities.System.Roles.Role", b =>
